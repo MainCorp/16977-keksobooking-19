@@ -10,11 +10,7 @@
 
   var cards = [];
 
-  var HEIGTH_PIN = 70;
-  var HALF_WIDTH_PIN = 25;
-
-  var CARDS_LENGTH = 8;
-  var CARDS_TITLES = [
+  var cardsTitles = [
     'Заголовок 1',
     'Заголовок 2',
     'Заголовок 3',
@@ -25,44 +21,20 @@
     'Заголовок 8'
   ];
 
-  var CARDS_TYPES = [
+  var cardsTypes = [
     'palace',
     'flat',
     'house',
     'bungalo'
   ];
 
-  var CARDS_PRICES_MIN = 1;
-  var CARDS_PRICES_MAX = 10;
-
-  var CARDS_ROOMS_MIN = 1;
-  var CARDS_ROOMS_MAX = 4;
-
-  var CARDS_GUESTS_MIN = 1;
-  var CARDS_GUESTS_MAX = 5;
-
-  var CARDS_CHECKIN = [
+  var cardsCheckin = [
     '12:00',
     '13:00',
     '14:00'
   ];
 
-  var CARDS_CHECKOUT = [
-    '12:00',
-    '13:00',
-    '14:00'
-  ];
-
-  var CARDS_FEATURES = [
-    'wifi',
-    'dishwasher',
-    'parking',
-    'washer',
-    'elevator',
-    'conditioner'
-  ];
-
-  var CARDS_DESCRIPTIONS = [
+  var cardsDescriptions = [
     'Описание 1',
     'Описание 2',
     'Описание 3',
@@ -73,11 +45,40 @@
     'Описание 8'
   ];
 
-  var CARDS_PHOTOS = [
+  var cardsPhotos = [
     'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
     'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
     'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
   ];
+
+  var cardsFeatures = [
+    'wifi',
+    'dishwasher',
+    'parking',
+    'washer',
+    'elevator',
+    'conditioner'
+  ];
+
+  var cardsCheckout = [
+    '12:00',
+    '13:00',
+    '14:00'
+  ];
+
+  var HEIGTH_PIN = 70;
+  var HALF_WIDTH_PIN = 25;
+
+  var CARDS_LENGTH = 8;
+
+  var CARDS_PRICES_MIN = 1;
+  var CARDS_PRICES_MAX = 10;
+
+  var CARDS_ROOMS_MIN = 1;
+  var CARDS_ROOMS_MAX = 4;
+
+  var CARDS_GUESTS_MIN = 1;
+  var CARDS_GUESTS_MAX = 5;
 
   var CARDS_LOCATION_X_MIN = 25;
   var CARDS_LOCATION_Y_MIN = 130;
@@ -141,17 +142,17 @@
       },
 
       'offer': {
-        'title': CARDS_TITLES[i],
+        'title': cardsTitles[i],
         'address': getRandomArbitrary(CARDS_LOCATION_X_MIN, locationXMax) + ', ' + getRandomArbitrary(CARDS_LOCATION_Y_MIN, CARDS_LOCATION_Y_MAX),
         'price': getRandomArbitrary(CARDS_PRICES_MIN, CARDS_PRICES_MAX),
-        'type': getRandomValue(CARDS_TYPES),
+        'type': getRandomValue(cardsTypes),
         'rooms': getRandomArbitrary(CARDS_ROOMS_MIN, CARDS_ROOMS_MAX),
         'guests': getRandomArbitrary(CARDS_GUESTS_MIN, CARDS_GUESTS_MAX),
-        'checkin': getRandomValue(CARDS_CHECKIN),
-        'checkout': getRandomValue(CARDS_CHECKOUT),
-        'features': generationSomeRandomText(CARDS_FEATURES),
-        'description': CARDS_DESCRIPTIONS[i],
-        'photos': generationSomeRandomText(CARDS_PHOTOS)
+        'checkin': getRandomValue(cardsCheckin),
+        'checkout': getRandomValue(cardsCheckout),
+        'features': generationSomeRandomText(cardsFeatures),
+        'description': cardsDescriptions[i],
+        'photos': generationSomeRandomText(cardsPhotos)
       },
 
       'location': {
