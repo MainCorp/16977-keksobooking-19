@@ -24,16 +24,6 @@
     'Заголовок 7',
     'Заголовок 8'
   ];
-  var CARDS_ADDRESS = [
-    '{{location.x}}, {{location.y}}',
-    '{{location.x}}, {{location.y}}',
-    '{{location.x}}, {{location.y}}',
-    '{{location.x}}, {{location.y}}',
-    '{{location.x}}, {{location.y}}',
-    '{{location.x}}, {{location.y}}',
-    '{{location.x}}, {{location.y}}',
-    '{{location.x}}, {{location.y}}'
-  ];
 
   var CARDS_TYPES = [
     'palace',
@@ -70,6 +60,17 @@
     'washer',
     'elevator',
     'conditioner'
+  ];
+
+  var CARDS_DESCRIPTIONS = [
+    'Описание 1',
+    'Описание 2',
+    'Описание 3',
+    'Описание 4',
+    'Описание 5',
+    'Описание 6',
+    'Описание 7',
+    'Описание 8'
   ];
 
   var CARDS_PHOTOS = [
@@ -141,7 +142,7 @@
 
       'offer': {
         'title': CARDS_TITLES[i],
-        'address': CARDS_ADDRESS[i],
+        'address': getRandomArbitrary(CARDS_LOCATION_X_MIN, locationXMax) + ', ' + getRandomArbitrary(CARDS_LOCATION_Y_MIN, CARDS_LOCATION_Y_MAX),
         'price': getRandomArbitrary(CARDS_PRICES_MIN, CARDS_PRICES_MAX),
         'type': getRandomValue(CARDS_TYPES),
         'rooms': getRandomArbitrary(CARDS_ROOMS_MIN, CARDS_ROOMS_MAX),
@@ -149,7 +150,7 @@
         'checkin': getRandomValue(CARDS_CHECKIN),
         'checkout': getRandomValue(CARDS_CHECKOUT),
         'features': generationSomeRandomText(CARDS_FEATURES),
-        'description': getRandomArbitrary(CARDS_LOCATION_X_MIN, locationXMax) + ', ' + getRandomArbitrary(CARDS_LOCATION_Y_MIN, CARDS_LOCATION_Y_MAX),
+        'description': CARDS_DESCRIPTIONS[i],
         'photos': generationSomeRandomText(CARDS_PHOTOS)
       },
 
