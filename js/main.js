@@ -3,7 +3,6 @@
 (function () {
   var map = document.querySelector('.map');
   var markersBlock = map.querySelector('.map__pins');
-  var pin = map.querySelector('.map__pin');
   var markersTemplate = document.querySelector('#pin').content;
   var locationXMax = map.offsetWidth - 25;
 
@@ -49,7 +48,7 @@
   var CARDS_ROOMS_MIN = 1;
   var CARDS_ROOMS_MAX = 4;
 
-  var CARDS_GUESTS_MIN = 5;
+  var CARDS_GUESTS_MIN = 1;
   var CARDS_GUESTS_MAX = 5;
 
   var CARDS_CHECKIN = [
@@ -89,14 +88,16 @@
 
   function getRandomValue(values) {
     return values[Math.floor(Math.random() * values.length)];
-  };
+  }
 
   function generateSomeRandomNumbers(min, max, l) {
-    var arr = [],
-    m = [],
-    n = 0;
+    var arr = [];
+    var m = [];
+    var n = 0;
 
-    if (max - min < l - 1) return;
+    if (max - min < l - 1) {
+      return
+    };
 
     for (var i = 0; i <= (max - min); i++) {
       m[i] = i + min;
@@ -105,7 +106,7 @@
     for (var i = 0; i < l; i++) {
       n = Math.floor(Math.random() * (m.length));
       arr[i] = m.splice(n, 1);
-    };
+    }
 
     return arr;
   }
@@ -115,7 +116,7 @@
     var numbers = generateSomeRandomNumbers(1, values.length, maxLength);
     var list = [];
 
-    for (var i =  0; i < numbers.length; i++) {
+    for (var i = 0; i < numbers.length; i++) {
       list.push(values[numbers[i][0] - 1]);
     }
   }
@@ -145,7 +146,7 @@
           "price": getRandomArbitrary(CARDS_PRICES_MIN, CARDS_PRICES_MAX),
           "type": getRandomValue(CARDS_TYPES),
           "rooms": getRandomArbitrary(CARDS_ROOMS_MIN, CARDS_ROOMS_MAX),
-          "guests": getRandomArbitrary(CARDS_ROOMS_MIN, CARDS_ROOMS_MAX),
+          "guests": getRandomArbitrary(CARDS_GUESTS_MIN, CARDS_GUESTS_MAX),
           "checkin": getRandomValue(CARDS_CHECKIN),
           "checkout": getRandomValue(CARDS_CHECKOUT),
           "features": generationSomeRandomText(CARDS_FEATURES),
@@ -162,14 +163,15 @@
   }
 
   function createMarks(mark) {
-    var clone = pin.cloneNode(true);
+    var clone = markersTemplate.cloneNode(true);
+    var btn = clone.querySelector('.map__pin');
 
-    clone.querySelector('img').src = mark.author.avatar;
-    clone.querySelector('img').alt = mark.offer.title;
-    clone.style.left = (mark.location.x - HALF_WIDTH_PIN) + 'px';
-    clone.style.top = (mark.location.y - HEIGTH_PIN) + 'px';
+    btn.querySelector('img').src = mark.author.avatar;
+    btn.querySelector('img').alt = mark.offer.title;
+    btn.style.left = (mark.location.x - HALF_WIDTH_PIN) + 'px';
+    btn.style.top = (mark.location.y - HEIGTH_PIN) + 'px';
 
-    return clone;
+    return btn;
   }
 
   for (var i = 0; i < CARDS_LENGTH; i++) {
