@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
   var map = document.querySelector('.map');
   var markersBlock = map.querySelector('.map__pins');
   var markersTemplate = document.querySelector('#pin').content;
@@ -96,7 +96,7 @@
     var n = 0;
 
     if (max - min < l - 1) {
-      return;
+      return false;
     }
 
     for (var i = 0; i <= (max - min); i++) {
