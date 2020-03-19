@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+(function() {
   var map = document.querySelector('.map');
   var markersBlock = map.querySelector('.map__pins');
   var markersTemplate = document.querySelector('#pin').content;
@@ -96,16 +96,16 @@
     var n = 0;
 
     if (max - min < l - 1) {
-      return
-    };
+      return;
+    }
 
     for (var i = 0; i <= (max - min); i++) {
       m[i] = i + min;
     }
 
-    for (var i = 0; i < l; i++) {
+    for (var j = 0; j < l; j++) {
       n = Math.floor(Math.random() * (m.length));
-      arr[i] = m.splice(n, 1);
+      arr[j] = m.splice(n, 1);
     }
 
     return arr;
@@ -134,32 +134,30 @@
   }
 
   function createCard(i) {
-    cards.push(
-      {
-        "author": {
-          "avatar": 'img/avatars/user' + generationAvatars(i + 1) + '.png'
-        },
+    cards.push({
+      'author': {
+        'avatar': 'img/avatars/user' + generationAvatars(i + 1) + '.png'
+      },
 
-        "offer": {
-          "title": CARDS_TITLES[i],
-          "address": CARDS_ADDRESS[i],
-          "price": getRandomArbitrary(CARDS_PRICES_MIN, CARDS_PRICES_MAX),
-          "type": getRandomValue(CARDS_TYPES),
-          "rooms": getRandomArbitrary(CARDS_ROOMS_MIN, CARDS_ROOMS_MAX),
-          "guests": getRandomArbitrary(CARDS_GUESTS_MIN, CARDS_GUESTS_MAX),
-          "checkin": getRandomValue(CARDS_CHECKIN),
-          "checkout": getRandomValue(CARDS_CHECKOUT),
-          "features": generationSomeRandomText(CARDS_FEATURES),
-          "description": getRandomArbitrary(CARDS_LOCATION_X_MIN, locationXMax) + ', ' + getRandomArbitrary(CARDS_LOCATION_Y_MIN, CARDS_LOCATION_Y_MAX),
-          "photos": generationSomeRandomText(CARDS_PHOTOS)
-        },
+      'offer': {
+        'title': CARDS_TITLES[i],
+        'address': CARDS_ADDRESS[i],
+        'price': getRandomArbitrary(CARDS_PRICES_MIN, CARDS_PRICES_MAX),
+        'type': getRandomValue(CARDS_TYPES),
+        'rooms': getRandomArbitrary(CARDS_ROOMS_MIN, CARDS_ROOMS_MAX),
+        'guests': getRandomArbitrary(CARDS_GUESTS_MIN, CARDS_GUESTS_MAX),
+        'checkin': getRandomValue(CARDS_CHECKIN),
+        'checkout': getRandomValue(CARDS_CHECKOUT),
+        'features': generationSomeRandomText(CARDS_FEATURES),
+        'description': getRandomArbitrary(CARDS_LOCATION_X_MIN, locationXMax) + ', ' + getRandomArbitrary(CARDS_LOCATION_Y_MIN, CARDS_LOCATION_Y_MAX),
+        'photos': generationSomeRandomText(CARDS_PHOTOS)
+      },
 
-      "location": {
-        "x": getRandomArbitrary(CARDS_LOCATION_X_MIN, locationXMax),
-        "y": getRandomArbitrary(CARDS_LOCATION_Y_MIN, CARDS_LOCATION_Y_MAX)
-        }
+      'location': {
+        'x': getRandomArbitrary(CARDS_LOCATION_X_MIN, locationXMax),
+        'y': getRandomArbitrary(CARDS_LOCATION_Y_MIN, CARDS_LOCATION_Y_MAX)
       }
-    );
+    });
   }
 
   function createMarks(mark) {
@@ -178,8 +176,8 @@
     createCard(i);
   }
 
-  for (var i = 0; i < cards.length; i++) {
-    fragment.appendChild(createMarks(cards[i]));
+  for (var n = 0; n < cards.length; n++) {
+    fragment.appendChild(createMarks(cards[n]));
   }
 
   markersBlock.appendChild(fragment);
