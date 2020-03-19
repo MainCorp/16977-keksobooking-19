@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
   var map = document.querySelector('.map');
   var markersBlock = map.querySelector('.map__pins');
   var markersTemplate = document.querySelector('#pin').content;
@@ -181,7 +181,6 @@
 
   function createPopup(mark) {
     var popup = popupTemplate.cloneNode(true);
-    console.log(mark);
 
     var popupAvatar = popup.querySelector('.popup__avatar');
     var popupTitle = popup.querySelector('.popup__title');
@@ -283,7 +282,7 @@
       }
     }
     return popup;
-  };
+  }
 
   for (var i = 0; i < CARDS_LENGTH; i++) {
     createCard(i);
