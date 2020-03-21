@@ -11,6 +11,15 @@
   var popupTemplate = document.querySelector('#card').content.querySelector('.map__card');
   var filtersContainer = map.querySelector('.map__filters-container');
 
+  var advertForm = document.querySelector('.ad-form');
+  var mapFilters = document.querySelector('.map__filters-container');
+
+  var mainMark = document.querySelector('.map__pin--main');
+
+  var fieldAddress = document.querySelector('#address');
+  var fieldRoomNumber = document.querySelector('#room_number');
+  var fieldCapacity = document.querySelector('#capacity');
+
   var cards = [];
 
   var cardsTitles = [
@@ -86,6 +95,9 @@
   var CARDS_LOCATION_X_MIN = 25;
   var CARDS_LOCATION_Y_MIN = 130;
   var CARDS_LOCATION_Y_MAX = 630;
+
+  var POINT_HEIGHT = 22;
+  var POINT_WIDTH = 10;
 
   function getRandomArbitrary(min, max) {
     return Math.round(Math.random() * (max - min)) + min;
@@ -284,16 +296,133 @@
     return popup;
   }
 
-  for (var i = 0; i < CARDS_LENGTH; i++) {
-    createCard(i);
+  function initCards() {
+    for (var i = 0; i < CARDS_LENGTH; i++) {
+      createCard(i);
+    }
+
+    for (var n = 0; n < cards.length; n++) {
+      fragment.appendChild(createMarks(cards[n]));
+    }
+
+    markersBlock.appendChild(fragment);
+    map.insertBefore(createPopup(cards[0]), filtersContainer);
   }
 
-  for (var n = 0; n < cards.length; n++) {
-    fragment.appendChild(createMarks(cards[n]));
+  function addStateElements(container, elements, attr, state) {
+    var fields = container.querySelectorAll(elements);
+
+    if (fields) {
+      for (var i = 0; i < fields.length; i++) {
+        fields[i].setAttribute(attr, state);
+      }
+    }
   }
 
-  markersBlock.appendChild(fragment);
-  map.insertBefore(createPopup(cards[0]), filtersContainer);
+  function removeStateElements(container, elements, attr) {
+    var fields = container.querySelectorAll(elements);
 
-  map.classList.remove('map--faded');
+    if (fields) {
+      for (var i = 0; i < fields.length; i++) {
+        fields[i].removeAttribute(attr);
+      }
+    }
+  }
+
+  function findCenterElement(element) {
+    var left = element.offsetLeft;
+    var top = element.offsetTop;
+    var width = element.offsetWidth;
+    var height = element.offsetHeight;
+
+    var coordX = top - (height / 2);
+    var coordY = left - (width / 2);
+
+    return [coordX, coordY];
+  }
+
+  function disabledForm() {
+    addStateElements(advertForm, 'input', 'disabled', true);
+    addStateElements(advertForm, 'select', 'disabled', true);
+    addStateElements(advertForm, 'textarea', 'disabled', true);
+    addStateElements(advertForm, 'button', 'disabled', true);
+
+    addStateElements(mapFilters, 'input', 'disabled', true);
+    addStateElements(mapFilters, 'select', 'disabled', true);
+    addStateElements(mapFilters, 'textarea', 'disabled', true);
+  }
+
+  function addDefaultAddressCords() {
+    var coords = findCenterElement(mainMark);
+    var x = coords[0];
+    var y = coords[1];
+
+    if (fieldAddress) {
+      fieldAddress.value = x + ', ' + y;
+    }
+  }
+
+  function addActiveAddressCords() {
+    var coords = findCenterElement(mainMark);
+    var x = coords[0] + POINT_WIDTH;
+    var y = coords[1] + POINT_HEIGHT;
+
+    if (fieldAddress) {
+      fieldAddress.value = x + ', ' + y;
+    }
+  }
+
+  function disabledPage() {
+    addDefaultAddressCords();
+    disabledForm();
+  }
+
+  function handlerValidateForm() {
+    if (fieldRoomNumber && fieldCapacity) {
+      var rooms = Number(fieldRoomNumber.value);
+      var capacity = Number(fieldCapacity.value);
+
+      if (rooms === 1 && capacity !== 1) {
+        fieldRoomNumber.setCustomValidity('В одной комнате может проживать только 1 человек');
+      } else if (rooms === 2 && capacity !== 1 && capacity !== 2) {
+        fieldRoomNumber.setCustomValidity('В двух комнатах могут проживать только 1 или 2 человека');
+      } else if (rooms === 3 && capacity === 0) {
+        fieldRoomNumber.setCustomValidity('В трех комнатах могут проживать только 1, 2 или 3 человека');
+      } else if (rooms === 100 && capacity !== 0) {
+        fieldRoomNumber.setCustomValidity('100 комнат предназначены не для гостей');
+      } else {
+        fieldRoomNumber.setCustomValidity('');
+      }
+    }
+  }
+
+  function handlerInitMap(evt) {
+    if (evt.button === 0 || evt.key === 'Enter') {
+      map.classList.remove('map--faded');
+      advertForm.classList.remove('ad-form--disabled');
+
+      removeStateElements(advertForm, 'input', 'disabled');
+      removeStateElements(advertForm, 'select', 'disabled');
+      removeStateElements(advertForm, 'textarea', 'disabled');
+      removeStateElements(advertForm, 'button', 'disabled');
+
+      removeStateElements(mapFilters, 'input', 'disabled');
+      removeStateElements(mapFilters, 'select', 'disabled');
+      removeStateElements(mapFilters, 'textarea', 'disabled');
+
+      initCards();
+      addActiveAddressCords();
+
+      mainMark.removeEventListener('mousedown', handlerInitMap);
+      mainMark.removeEventListener('keydown', handlerInitMap);
+    }
+  }
+
+
+  disabledPage();
+
+  mainMark.addEventListener('mousedown', handlerInitMap);
+  mainMark.addEventListener('keydown', handlerInitMap);
+
+  advertForm.addEventListener('change', handlerValidateForm);
 })();
