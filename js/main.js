@@ -402,7 +402,7 @@
   function addActiveAddressCords() {
     var coords = findCenterElement(mainMark);
     var x = Math.round(coords[0] + POINT_WIDTH);
-    var y = Math.round(coords[1]+ POINT_HEIGHT);
+    var y = Math.round(coords[1] + POINT_HEIGHT);
 
     if (fieldAddress) {
       fieldAddress.value = x + ', ' + y;
@@ -419,8 +419,8 @@
       visibleOptions[i].style.display = 'block';
     }
 
-    for (var i = 0; i < options.length; i++) {
-      options[i].removeAttribute('selected');
+    for (var j = 0; j < options.length; j++) {
+      options[j].removeAttribute('selected');
     }
 
     activeElement.setAttribute('selected', 'selected');
@@ -429,7 +429,6 @@
   function validateForm() {
     if (fieldRoomNumber && fieldCapacity) {
       var rooms = Number(fieldRoomNumber.value);
-      var capacity = Number(fieldCapacity.value);
 
       var options = fieldCapacity.options;
       var optionNotForGuests = fieldCapacity.querySelector('option[value="0"]');
@@ -544,12 +543,14 @@
 
     if (evt.key === 'Escape') {
       deleteModals();
-      document.removeEventListener('keydown', handlerCloseModal)
+
+      document.removeEventListener('keydown', handlerCloseModal);
     }
 
     if (closeBtn) {
       deleteModals();
-      document.removeEventListener('click', handlerCloseModal)
+
+      document.removeEventListener('click', handlerCloseModal);
     }
   }
 
