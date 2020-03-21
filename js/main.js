@@ -507,13 +507,10 @@
     if (evt.button === 0 || evt.key === 'Enter') {
       var target = evt.target;
       var tag = target.tagName;
-
-      if (tag === 'IMG') {
-        var data = target.offsetParent.dataset.numBtn;
-      }
+      var data = target.offsetParent.dataset.numBtn;
 
       if (tag === 'BUTTON') {
-        var data = target.dataset.numBtn;
+        data = target.dataset.numBtn;
       }
 
       deleteModals();
