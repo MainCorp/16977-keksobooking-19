@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
   var map = document.querySelector('.map');
   var markersBlock = map.querySelector('.map__pins');
   var markersTemplate = document.querySelector('#pin').content;
@@ -447,7 +447,7 @@
       if (Number(fieldPrice.value) > MAX_PRICE) {
         fieldPrice.setCustomValidity('Максимально допустимая цена за ночь это ' + MAX_PRICE + ' рублей');
       } else if (fieldPrice.validity.badInput) {
-       fieldPrice.setCustomValidity('Укажите пожалуйста цену в цифрах');
+        fieldPrice.setCustomValidity('Укажите пожалуйста цену в цифрах');
       } else {
         fieldPrice.setCustomValidity('');
       }
@@ -559,11 +559,11 @@
 
   advertForm.addEventListener('change', handlerValidateForm);
 
-  fieldTimein.addEventListener('change', function () {
+  fieldTimein.addEventListener('change', function() {
     fieldTimeout.value = fieldTimein.value;
   });
 
-  fieldTimeout.addEventListener('change', function () {
+  fieldTimeout.addEventListener('change', function() {
     fieldTimein.value = fieldTimeout.value;
   });
 
