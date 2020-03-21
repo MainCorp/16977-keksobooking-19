@@ -390,8 +390,8 @@
 
   function addDefaultAddressCords() {
     var coords = findCenterElement(mainMark);
-    var x = coords[0];
-    var y = coords[1];
+    var x = Math.round(coords[0]);
+    var y = Math.round(coords[1]);
 
     if (fieldAddress) {
       fieldAddress.value = x + ', ' + y;
@@ -400,8 +400,8 @@
 
   function addActiveAddressCords() {
     var coords = findCenterElement(mainMark);
-    var x = coords[0] + POINT_WIDTH;
-    var y = coords[1] + POINT_HEIGHT;
+    var x = Math.round(coords[0] + POINT_WIDTH);
+    var y = Math.round(coords[1] + POINT_HEIGHT);
 
     if (fieldAddress) {
       fieldAddress.value = x + ', ' + y;
@@ -413,21 +413,40 @@
     disabledForm();
   }
 
+  function validateOptioons(options, visibleOptions, activeElement) {
+    for (var i = 0; i < visibleOptions.length; i++) {
+      visibleOptions[i].style.display = 'block';
+    }
+
+    for (var j = 0; j < options.length; j++) {
+      options[j].removeAttribute('selected');
+    }
+
+    activeElement.setAttribute('selected', 'selected');
+  }
+
   function validateForm() {
     if (fieldRoomNumber && fieldCapacity) {
       var rooms = Number(fieldRoomNumber.value);
-      var capacity = Number(fieldCapacity.value);
 
-      if (rooms === 1 && capacity !== 1) {
-        fieldRoomNumber.setCustomValidity('В одной комнате может проживать только 1 человек');
-      } else if (rooms === 2 && capacity !== 1 && capacity !== 2) {
-        fieldRoomNumber.setCustomValidity('В двух комнатах могут проживать только 1 или 2 человека');
-      } else if (rooms === 3 && capacity === 0) {
-        fieldRoomNumber.setCustomValidity('В трех комнатах могут проживать только 1, 2 или 3 человека');
-      } else if (rooms === 100 && capacity !== 0) {
-        fieldRoomNumber.setCustomValidity('100 комнат предназначены не для гостей');
-      } else {
-        fieldRoomNumber.setCustomValidity('');
+      var options = fieldCapacity.options;
+      var optionNotForGuests = fieldCapacity.querySelector('option[value="0"]');
+      var optionForOneGuest = fieldCapacity.querySelector('option[value="1"]');
+      var optionForTwoGuests = fieldCapacity.querySelector('option[value="2"]');
+      var optionForThreeGuests = fieldCapacity.querySelector('option[value="3"]');
+
+      for (var i = 0; i < options.length; i++) {
+        options[i].style.display = 'none';
+      }
+
+      if (rooms === 1) {
+        validateOptioons(options, [optionForOneGuest], optionForOneGuest);
+      } else if (rooms === 2) {
+        validateOptioons(options, [optionForOneGuest, optionForTwoGuests], optionForTwoGuests);
+      } else if (rooms === 3) {
+        validateOptioons(options, [optionForOneGuest, optionForTwoGuests, optionForThreeGuests], optionForThreeGuests);
+      } else if (rooms === 100) {
+        validateOptioons(options, [optionNotForGuests], optionNotForGuests);
       }
     }
 
@@ -521,8 +540,16 @@
   function handlerCloseModal(evt) {
     var closeBtn = evt.target.classList.contains('popup__close');
 
-    if (evt.key === 'Escape' || closeBtn) {
+    if (evt.key === 'Escape') {
       deleteModals();
+
+      document.removeEventListener('keydown', handlerCloseModal);
+    }
+
+    if (closeBtn) {
+      deleteModals();
+
+      document.removeEventListener('click', handlerCloseModal);
     }
   }
 
