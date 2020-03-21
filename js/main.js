@@ -110,7 +110,6 @@
   var TITLE_MIN_LENGTH = 30;
   var TITLE_MAX_LENGTH = 100;
 
-  var MIN_PRICE = 0;
   var MAX_PRICE = 1000000;
 
   function getRandomArbitrary(min, max) {
@@ -457,22 +456,22 @@
       switch (fieldType.value) {
         case 'bungalo':
           fieldPrice.min = 0;
-          fieldPrice.placeholder = 'Мин. 0руб.'
+          fieldPrice.placeholder = 'Мин. 0руб.';
           break;
 
         case 'flat':
           fieldPrice.min = 1000;
-          fieldPrice.placeholder = 'Мин. 1000руб.'
+          fieldPrice.placeholder = 'Мин. 1000руб.';
           break;
 
         case 'house':
           fieldPrice.min = 5000;
-          fieldPrice.placeholder = 'Мин. 5000руб.'
+          fieldPrice.placeholder = 'Мин. 5000руб.';
           break;
 
         case 'palace':
           fieldPrice.min = 10000;
-          fieldPrice.placeholder = 'Мин. 10000руб.'
+          fieldPrice.placeholder = 'Мин. 10000руб.';
           break;
       }
     }
@@ -502,10 +501,6 @@
       mainMark.removeEventListener('mousedown', handlerInitMap);
       mainMark.removeEventListener('keydown', handlerInitMap);
     }
-  }
-
-  function handlerDeleteModals() {
-    deleteModals();
   }
 
   function handlerShowModals(evt) {
@@ -542,7 +537,6 @@
       var type = isImage.type.split('/')[0];
 
       if (type !== 'image') {
-        alert('Кажется, что вы загрузили не изображение :)');
         evt.target.value = '';
       }
     }
@@ -559,11 +553,11 @@
 
   advertForm.addEventListener('change', handlerValidateForm);
 
-  fieldTimein.addEventListener('change', function() {
+  fieldTimein.addEventListener('change', function () {
     fieldTimeout.value = fieldTimein.value;
   });
 
-  fieldTimeout.addEventListener('change', function() {
+  fieldTimeout.addEventListener('change', function () {
     fieldTimein.value = fieldTimeout.value;
   });
 
