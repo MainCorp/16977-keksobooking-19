@@ -149,7 +149,6 @@
     for (var i = 0; i < numbers.length; i++) {
       list.push(values[numbers[i][0] - 1]);
     }
-
     return list;
   }
 
