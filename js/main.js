@@ -424,5 +424,5 @@
   mainMark.addEventListener('mousedown', handlerInitMap);
   mainMark.addEventListener('keydown', handlerInitMap);
 
-  advertForm.addEventListener('change', handlerValidateForm)
+  advertForm.addEventListener('change', handlerValidateForm);
 })();
