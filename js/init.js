@@ -14,6 +14,7 @@
   var constants = window.constants;
   var pin = window.pin;
   var utils = window.utils;
+  var popup = window.popup;
 
   function disabledPage() {
     form.addDefaultAddressCords();
