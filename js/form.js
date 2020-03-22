@@ -16,6 +16,9 @@
   var fieldImages = advertForm.querySelector('#images');
   var fieldAvatar = advertForm.querySelector('#avatar');
 
+  var constants = window.constants;
+  var utils = window.utils;
+
   var validateOptions = function (select, options, visibleOptions, activeElement) {
     for (var i = 0; i < visibleOptions.length; i++) {
       visibleOptions[i].removeAttribute('hidden');
@@ -24,7 +27,7 @@
     if (activeElement) {
       select.value = activeElement.value;
 
-      select.addEventListener('change', form.handlers.checkSelect);
+      select.addEventListener('change', handlerCheckSelect);
     }
   };
 
@@ -43,13 +46,13 @@
       }
 
       if (rooms === 1) {
-        form.validateOptions(fieldCapacity, options, [optionForOneGuest], optionForOneGuest);
+        validateOptions(fieldCapacity, options, [optionForOneGuest], optionForOneGuest);
       } else if (rooms === 2) {
-        form.validateOptions(fieldCapacity, options, [optionForOneGuest, optionForTwoGuests], optionForTwoGuests);
+        validateOptions(fieldCapacity, options, [optionForOneGuest, optionForTwoGuests], optionForTwoGuests);
       } else if (rooms === 3) {
-        form.validateOptions(fieldCapacity, options, [optionForOneGuest, optionForTwoGuests, optionForThreeGuests], optionForThreeGuests);
+        validateOptions(fieldCapacity, options, [optionForOneGuest, optionForTwoGuests, optionForThreeGuests], optionForThreeGuests);
       } else if (rooms === 100) {
-        form.validateOptions(fieldCapacity, options, [optionNotForGuests], optionNotForGuests);
+        validateOptions(fieldCapacity, options, [optionNotForGuests], optionNotForGuests);
       }
     }
 
@@ -129,7 +132,7 @@
     }
   };
 
-  var handlerCheckSelect = function(evt) {
+  var handlerCheckSelect = function (evt) {
     evt.stopPropagation();
 
     var target = evt.target;
@@ -137,7 +140,7 @@
 
     target.value = target.options[index].value;
 
-    target.removeEventListener('change', form.handlers.checkSelect);
+    target.removeEventListener('change', handlerCheckSelect);
   };
 
   var handlerValidateForm = function () {
@@ -172,7 +175,7 @@
     }
   };
 
-  advertForm.addEventListener('change', form.handlers.validateForm);
+  advertForm.addEventListener('change', handlerValidateForm);
 
   fieldTimein.addEventListener('change', function () {
     fieldTimeout.value = fieldTimein.value;
@@ -182,7 +185,7 @@
     fieldTimein.value = fieldTimeout.value;
   });
 
-  fieldImages.addEventListener('change', form.handlers.validateImages);
+  fieldImages.addEventListener('change', handlerValidateImages);
 
-  fieldAvatar.addEventListener('change', form.handlers.validateImages);
+  fieldAvatar.addEventListener('change', handlerValidateImages);
 })();

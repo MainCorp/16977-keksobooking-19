@@ -98,5 +98,5 @@
     addStateElements: addStateElements,
     removeStateElements: removeStateElements,
     findCenterElement: findCenterElement,
-  }
+  };
 })();

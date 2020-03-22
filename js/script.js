@@ -2,6 +2,7 @@
 
 (function () {
   var mainMark = document.querySelector('.map__pin--main');
+  var init = window.init;
 
   init.disabledPage();
 

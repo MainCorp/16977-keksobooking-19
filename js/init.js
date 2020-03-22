@@ -9,6 +9,9 @@
   var mainMark = document.querySelector('.map__pin--main');
   var fieldAddress = advertForm.querySelector('#address');
 
+  var popup = window.poopup;
+  var form = window.form;
+
   function disabledPage() {
     form.addDefaultAddressCords();
     form.disabledForm();

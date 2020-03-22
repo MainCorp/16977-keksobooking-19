@@ -1,8 +1,10 @@
 'use strict';
 
-(function() {
+(function () {
   var map = document.querySelector('.map');
   var locationXMax = map.offsetWidth - 25;
+  var utils = window.utils;
+  var constants = window.constants;
 
   var cardsTitles = [
     'Заголовок 1',
@@ -95,5 +97,5 @@
 
   window.data = {
     getCards: getCards
-  }
+  };
 })();

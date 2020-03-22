@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
   var HEIGTH_PIN = 70;
   var HALF_WIDTH_PIN = 25;
 
@@ -45,5 +45,5 @@
     TITLE_MIN_LENGTH: TITLE_MIN_LENGTH,
     TITLE_MAX_LENGTH: TITLE_MAX_LENGTH,
     MAX_PRICE: MAX_PRICE
-  }
+  };
 })();

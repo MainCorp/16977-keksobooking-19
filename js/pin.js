@@ -2,6 +2,7 @@
 
 (function () {
   var markersTemplate = document.querySelector('#pin').content;
+  var constants = window.constants;
 
   var createMarks = function (mark, num) {
     var clone = markersTemplate.cloneNode(true);
@@ -19,5 +20,5 @@
 
   window.pin = {
     get: createMarks
-  }
+  };
 })();
