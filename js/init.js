@@ -7,10 +7,13 @@
   var fragment = document.createDocumentFragment();
   var advertForm = document.querySelector('.ad-form');
   var mainMark = document.querySelector('.map__pin--main');
-  var fieldAddress = advertForm.querySelector('#address');
 
   var popup = window.poopup;
   var form = window.form;
+  var data = window.data;
+  var constants = window.constants;
+  var pin = window.pin;
+  var utils = window.utils;
 
   function disabledPage() {
     form.addDefaultAddressCords();
@@ -28,7 +31,7 @@
     markersBlock.appendChild(fragment);
 
     init.initPopup(markersBlock);
-  }
+  };
 
   var initPopup = function (btnContainer) {
     var btns = btnContainer.querySelectorAll('button');
@@ -41,7 +44,7 @@
         btn.addEventListener('keydown', init.handlers.showModals);
       }
     }
-  }
+  };
 
   var initMap = function (evt) {
     if (evt.button === 0 || evt.key === 'Enter') {

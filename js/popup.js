@@ -121,5 +121,5 @@
   window.popup = {
     get: createPopup,
     delete: deleteModals
-  }
+  };
 })();
