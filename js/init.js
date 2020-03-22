@@ -8,13 +8,12 @@
   var advertForm = document.querySelector('.ad-form');
   var mainMark = document.querySelector('.map__pin--main');
 
-  var popup = window.poopup;
+  var popup = window.popup;
   var form = window.form;
   var data = window.data;
   var constants = window.constants;
   var pin = window.pin;
   var utils = window.utils;
-  var popup = window.popup;
 
   function disabledPage() {
     form.addDefaultAddressCords();
