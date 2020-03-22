@@ -66,7 +66,7 @@
           y: mainMark.offsetTop - shift.y
         };
 
-        if (currentPoint.x > constants.POINT_WIDTH &&  currentPoint.x <= isOverlayLeft) {
+        if (currentPoint.x > constants.POINT_WIDTH && currentPoint.x <= isOverlayLeft) {
           mainMark.style.left = currentPoint.x + 'px';
         }
 
