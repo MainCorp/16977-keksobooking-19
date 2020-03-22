@@ -30,7 +30,7 @@
 
     markersBlock.appendChild(fragment);
 
-    init.initPopup(markersBlock);
+    initPopup(markersBlock);
   };
 
   var initPopup = function (btnContainer) {
@@ -40,8 +40,8 @@
       var btn = btns[i];
 
       if (btn.classList.contains('map__pin--main') === false) {
-        btn.addEventListener('mousedown', init.handlers.showModals);
-        btn.addEventListener('keydown', init.handlers.showModals);
+        btn.addEventListener('mousedown', showModals);
+        btn.addEventListener('keydown', showModals);
       }
     }
   };
@@ -60,11 +60,11 @@
       utils.removeStateElements(filtersContainer, 'select', 'disabled');
       utils.removeStateElements(filtersContainer, 'textarea', 'disabled');
 
-      init.initCards();
+      initCards();
       form.addActiveAddressCords();
 
-      mainMark.removeEventListener('mousedown', init.handlers.initMap);
-      mainMark.removeEventListener('keydown', init.handlers.initMap);
+      mainMark.removeEventListener('mousedown', initMap);
+      mainMark.removeEventListener('keydown', initMap);
     }
   };
 
