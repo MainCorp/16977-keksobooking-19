@@ -62,6 +62,7 @@
 
       initCards();
       form.addActiveAddressCords();
+      pin.setMove();
 
       mainMark.removeEventListener('mousedown', initMap);
       mainMark.removeEventListener('keydown', initMap);
